@@ -62,7 +62,7 @@ struct great_adapter {
 	unsigned char 	*tx_bufs;        /* Tx buffer start address (virtual address). */
 	dma_addr_t 		tx_bufs_dma;      /* Tx buffer dma address (physical address) */
 
-    struct net_device_stats stats;
+	struct net_device_stats stats;
 	unsigned char *rx_ring;
 	dma_addr_t rx_ring_dma;
 	unsigned int cur_rx;
@@ -124,7 +124,7 @@ static void great_hw_start (struct net_device *netdev)
 	// reset the chip
 	great_chip_reset(ioaddr);
 
-    /* TODO: Must enable Tx/Rx before setting transfer thresholds! */
+	/* TODO: Must enable Tx/Rx before setting transfer thresholds! */
 
 	/* TODO: tx config */
 
@@ -132,7 +132,7 @@ static void great_hw_start (struct net_device *netdev)
 
 	/* TODO: init Tx buffer DMA addresses */
 
-    /* TODO: Enable all known interrupts by setting the interrupt mask. */
+	/* TODO: Enable all known interrupts by setting the interrupt mask. */
 
 	netif_start_queue (netdev);
 	return;
@@ -208,8 +208,8 @@ static netdev_tx_t great_xmit_frame(struct sk_buff *skb,
 	skb_copy_and_csum_dev(skb, adapter->tx_buf[entry]);
 	dev_kfree_skb(skb);
 
-    entry++;
-    adapter->cur_tx = entry % NUM_TX_DESC;
+	entry++;
+	adapter->cur_tx = entry % NUM_TX_DESC;
 
  	if(adapter->cur_tx == adapter->dirty_tx) {
  		netif_stop_queue(netdev);
